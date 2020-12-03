@@ -2,24 +2,32 @@ package com.example.demo.controller.imp;
 
 import com.example.demo.bean.User;
 import com.example.demo.controller.UserController;
-import com.example.demo.service.UserService;
 import com.example.demo.service.imp.UserServiceImpl;
 import com.util.ResponseData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+import java.util.List;
+
+
+@RestController
 @RequestMapping("/user")
 @Api(value = "User")
 public class UserControllerImpl implements UserController {
     @Autowired
     private UserServiceImpl userService;
-//
-    @ApiOperation(value = "register" , notes = "注册接口")
+
+    //
+    @ResponseBody
+    @ApiOperation(value = "register", notes = "注册接口")
     @PostMapping("/register")
     @Override
     public ResponseData<Integer> register(User user) {
@@ -27,11 +35,49 @@ public class UserControllerImpl implements UserController {
         ResponseData<Integer> registerCode = userService.register(user);
         return registerCode;
     }
-    @ApiOperation(value = "login" ,notes="登录接口")
+    @ResponseBody
+    @ApiOperation(value = "login", notes = "登录接口")
     @PostMapping("/login")
     @Override
     public ResponseData<User> login(String username, String password) {
         ResponseData<User> login = userService.login(username, password);
         return login;
     }
+
+    @ResponseBody
+    @ApiOperation(value = "validUser", notes = "查询有效用户")
+    @PostMapping("/validUser")
+    @Override
+    public List<User> validUser() {
+        List<User> listResponseData = userService.validUser();
+        return listResponseData;
+    }
+    @ResponseBody
+    @ApiOperation(value = "deleteUser", notes = "通过用户名删除用户")
+    @PostMapping("/deleteUser")
+    @Override
+    public ResponseData<Integer> deleteUser(String username,String password) {
+        ResponseData<Integer> integerResponseData = userService.deleteUser(username,password);
+        return integerResponseData;
+    }
+    @ResponseBody
+    @ApiOperation(value = "changeMessage", notes = "更改个人信息")
+    @PostMapping("/changeMessage")
+    @Override
+    public ResponseData<Integer> changeMessage(User user,String newUsername) {
+        System.out.println(newUsername);
+        System.out.println(user);
+        ResponseData<Integer> integerResponseData = userService.changeMessage(user,newUsername);
+        return integerResponseData;
+    }
+    @ResponseBody
+    @ApiOperation(value = "changPassword", notes = "修改密码")
+    @PostMapping("/changPassword")
+    @Override
+    public ResponseData<Integer> changePassword(User user, String newPassword) {
+        ResponseData<Integer> integerResponseData = userService.changePassword(user, newPassword);
+        return integerResponseData;
+    }
+
+
 }

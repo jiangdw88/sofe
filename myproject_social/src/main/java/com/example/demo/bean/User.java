@@ -1,5 +1,7 @@
 package com.example.demo.bean;
 
+import java.util.Date;
+
 public class User {
     /**
      * 密码(以字母开头，长度在6~18之间，只能包含字母、数字和下划线)
@@ -7,22 +9,32 @@ public class User {
      */
 //    用户id
     private String id;
-//    用户名
-    private String username;
-//    密码
-    private String password;
+    //    用户名
+    private String uName;
+    //    密码
+    private String uPassword;
+    //    图片连接
+    private String uUrl;
+    //    性别(0男 1女)
+    private Integer uGender;
+    //    个人简介
+    private String profile;
+    //    添加时间
+    private String addtime;
+    //    修改时间
+    private String correcttime;
 
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", url='" + url + '\'' +
-                ", gender=" + gender +
+                "id='" + id + '\'' +
+                ", uName='" + uName + '\'' +
+                ", uPassword='" + uPassword + '\'' +
+                ", uUrl='" + uUrl + '\'' +
+                ", uGender=" + uGender +
                 ", profile='" + profile + '\'' +
-                ", add_time='" + add_time + '\'' +
-                ", correct_time='" + correct_time + '\'' +
+                ", addtime='" + addtime + '\'' +
+                ", correcttime='" + correcttime + '\'' +
                 ", status=" + status +
                 ", isuse=" + isuse +
                 '}';
@@ -36,36 +48,36 @@ public class User {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getuName() {
+        return uName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setuName(String uName) {
+        this.uName = uName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getuPassword() {
+        return uPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setuPassword(String uPassword) {
+        this.uPassword = uPassword;
     }
 
-    public String getUrl() {
-        return url;
+    public String getuUrl() {
+        return uUrl;
     }
 
-    public void setUrl(String url) {
-        this.url = url;
+    public void setuUrl(String uUrl) {
+        this.uUrl = uUrl;
     }
 
-    public Integer getGender() {
-        return gender;
+    public Integer getuGender() {
+        return uGender;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public void setuGender(Integer uGender) {
+        this.uGender = uGender;
     }
 
     public String getProfile() {
@@ -76,20 +88,20 @@ public class User {
         this.profile = profile;
     }
 
-    public String getAdd_time() {
-        return add_time;
+    public String getAddtime() {
+        return addtime;
     }
 
-    public void setAdd_time(String add_time) {
-        this.add_time = add_time;
+    public void setAddtime(String addtime) {
+        this.addtime = addtime;
     }
 
-    public String getCorrect_time() {
-        return correct_time;
+    public String getCorrecttime() {
+        return correcttime;
     }
 
-    public void setCorrect_time(String correct_time) {
-        this.correct_time = correct_time;
+    public void setCorrecttime(String correcttime) {
+        this.correcttime = correcttime;
     }
 
     public Integer getStatus() {
@@ -111,31 +123,21 @@ public class User {
     public User() {
     }
 
-    public User(String id, String username, String password, String url, Integer gender, String profile, String add_time, String correct_time, Integer status, Integer isuse) {
+    public User(String id, String uName, String uPassword, String uUrl, Integer uGender, String profile, String addtime, String correcttime, Integer status, Integer isuse) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.url = url;
-        this.gender = gender;
+        this.uName = uName;
+        this.uPassword = uPassword;
+        this.uUrl = uUrl;
+        this.uGender = uGender;
         this.profile = profile;
-        this.add_time = add_time;
-        this.correct_time = correct_time;
+        this.addtime = addtime;
+        this.correcttime = correcttime;
         this.status = status;
         this.isuse = isuse;
     }
 
-    //    图片连接
-    private String url;
-//    性别(0男 1女)
-    private Integer gender;
-//    个人简介
-    private String profile;
-//    添加时间
-    private String add_time;
-//    修改时间
-    private String correct_time;
-//    状态码是否有效(0有效 1无效)
+    //    状态码是否有效(0有效 1无效)
     private Integer status;
-//    是否可用(0可用 1不可用)
+    //    是否可用(0可用 1不可用)
     private Integer isuse;
 }

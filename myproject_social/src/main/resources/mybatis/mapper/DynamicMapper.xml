@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.DynamicMapper">
+    <!--    新增动态-->
+    <!--     ResponseData<Integer> ReleaseNews(Dynamic dynamic);-->
+    <insert id="releaseNews" parameterType="com.example.demo.bean.Dynamic">
+        insert into t_dynamic values (#{dId},#{title},#{content},#{releaseTime},#{status},#{sortId},#{userId})
+    </insert>
+    <!--  查询个人动态
+        List<Dynamic> myDynamic(String id);-->
+    <select id="myDynamic" resultType="com.example.demo.bean.Dynamic">
+              SELECT
+	    title,content,sort_id,d_id,user_id
+        FROM
+	t_dynamic
+	    LEFT JOIN t_user ON t_user.id = t_dynamic.d_id
+        WHERE
+	t_dynamic.user_id = #{id}
+    </select>
+<!--     删除本人动态假删除
+    int deleteDynamic(String id);-->
+    <update id="deleteDynamic">
+            UPDATE t_dynamic
+            SET STATUS = 1
+            WHERE
+	        d_id =#{id}
+    </update>
+</mapper>

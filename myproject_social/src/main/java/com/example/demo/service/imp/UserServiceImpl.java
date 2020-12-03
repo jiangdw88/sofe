@@ -6,63 +6,160 @@ import com.example.demo.service.UserService;
 import com.util.EnumCode;
 import com.util.ResponseData;
 import com.util.UUIDAndTime;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
+
+import java.util.List;
 
 @Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
+
     @Override
 //    注册
     public ResponseData<Integer> register(User user) {
-        String password = user.getPassword();
-        String username = user.getUsername();
+        String password = user.getuPassword();
+        String username = user.getuName();
+//        判断账户是否重复repead
         User repead = userMapper.findUsername(username);
-        if (repead != null){
-            System.out.println(ResponseData.error(EnumCode.USER_HAS_ERROR));
+        if (repead != null) {
+            System.out.println(EnumCode.USER_HAS_ERROR.getMessage());
             return ResponseData.error(EnumCode.USER_HAS_ERROR);
         }
-
+//      密码加密
         String md5Str = DigestUtils.md5DigestAsHex(password.getBytes());
-        String regex = "[a-zA-Z0-9_]{6,18}";
+//        密码格式 字母开头6-18位
+        String regex = "^[a-zA-Z0-9_]{1,}$";
 //        判断账户名密码格式
-        if (!password.matches(regex)){
+        if (!password.matches(regex)) {
             return ResponseData.error(EnumCode.USERORPASSWORD_ERROR);
-        }else if (! username.matches(regex)){
+        } else if (!username.matches(regex)) {
             return ResponseData.error(EnumCode.USERORPASSWORD_ERROR);
-        }else{
+        } else {
+//            设置id
             user.setId(UUIDAndTime.getUUID());
-            user.setAdd_time(UUIDAndTime.getTime());
-            user.setCorrect_time(UUIDAndTime.getTime());
-            user.setPassword(md5Str);
+//            设置添加时间
+            user.setAddtime(UUIDAndTime.getTime());
+//            设置更改时间
+            user.setCorrecttime(UUIDAndTime.getTime());
+//            对密码进行加密
+            user.setuPassword(md5Str);
+//            设置账户
             user.setStatus(0);
+//            设置账户是否可用默认0
             user.setIsuse(0);
             System.out.println(user);
             int code = userMapper.addUser(user);
-            if (code >= 1){
+            if (code >= 1) {
                 return ResponseData.success(code);
-            }else{
+            } else {
+                System.out.println(EnumCode.USER_HAS_ERROR.getMessage());
                 return ResponseData.error(EnumCode.USER_HAS_ERROR);
             }
         }
     }
 
+    //登录功能
     @Override
     public ResponseData<User> login(String username, String password) {
+//        密码进加密
         password = DigestUtils.md5DigestAsHex(password.getBytes());
-        User byUsername = userMapper.findByUsername(username, password);
-        if (byUsername != null){
+        System.out.println(password);
+//        通过账户名 密码查找用户
+        User byUsername = userMapper.login(username, password);
+        System.out.println(byUsername);
+        if (byUsername != null) {
 //            如果非空说明有值密码正确
             System.out.println("密码正确");
             return ResponseData.success(byUsername);
-        }else {
+        } else {
 //            密码错误
-            System.out.println("密码错误");
+            System.out.println(EnumCode.PASSWORD_ERROR.getMessage());
             return ResponseData.error(EnumCode.PASSWORD_ERROR);
         }
     }
 
+    //查找全部可用用户
+    @Override
+    public List<User> validUser() {
+        List<User> userList = userMapper.validUser();
+        System.out.println(userList);
+        return userList;
 
+    }
+
+    //删除用户功能
+    @Override
+    public ResponseData<Integer> deleteUser(String username, String password) {
+        password = DigestUtils.md5DigestAsHex(password.getBytes());
+        int code = userMapper.deleteUser(username, password);
+        if (code >= 1) {
+            System.out.println("删除成功");
+            return ResponseData.success(code);
+        } else {
+            System.out.println(EnumCode.DELETE_FAIL.getMessage());
+            return ResponseData.error(EnumCode.DELETE_FAIL);
+        }
+
+    }
+
+    //  更改个人信息
+    @Override
+    public ResponseData<Integer> changeMessage(User user, String newUsername) {
+        //        设置更改时间
+        user.setCorrecttime(UUIDAndTime.getTime());
+        int code = userMapper.changeMessage(user, newUsername);
+        if (code >= 1) {
+            System.out.println("修改成功");
+            return ResponseData.success(code);
+        } else {
+            System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
+            return ResponseData.error(EnumCode.PARAMETER_ERROR);
+        }
+    }
+
+    @Override
+    public ResponseData<Integer> changePassword(User user, String newPassword) {
+//    修改密码功能
+//        原密码
+        String password = user.getuPassword();
+        //        对新密码格式效验 字母开头6-18位
+       String regex= "^[a-zA-Z0-9_]{1,}$";
+//        判断新密码格式是否正确
+        if (!newPassword.matches(regex)) {
+            System.out.println(EnumCode.USERORPASSWORD_ERROR.getMessage());
+            return ResponseData.error(EnumCode.USERORPASSWORD_ERROR);
+//    判断新密码和旧密码是否一致
+        } else if (password.equals(newPassword)) {
+            System.out.println(EnumCode.SAME_PASSWORD.getMessage());
+            return ResponseData.error(EnumCode.SAME_PASSWORD);
+        } else {
+//            如以上两条都通过则对密码进行加密并上传
+            user.setuPassword(DigestUtils.md5DigestAsHex(password.getBytes()));
+            newPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
+            user.setCorrecttime(UUIDAndTime.getTime());
+//        code为状态码
+            System.out.println("service:"+user);
+            System.out.println("newPassword:"+newPassword);
+            System.out.println("password:"+password);
+            int code = userMapper.changePassword(newPassword,user.getCorrecttime(),user.getuName(),user.getuPassword());
+            System.out.println("service:"+user);
+            System.out.println(code);
+            if (code >= 1) {
+                System.out.println("密码修改成功");
+                return ResponseData.success(code);
+            } else {
+                System.out.println(EnumCode.CHANGEPASSWORD_FAIL.getMessage());
+                return ResponseData.error(EnumCode.CHANGEPASSWORD_FAIL);
+            }
+        }
+    }
 }
+
+
+
+
+

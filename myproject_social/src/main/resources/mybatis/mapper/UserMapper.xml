@@ -3,18 +3,58 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.UserMapper">
-<!--     public void addUser(User user);-->
+    <!--     public void addUser(User user);-->
     <insert id="addUser" parameterType="com.example.demo.bean.User">
         insert into t_user values
-        (#{id},#{username},#{password},#{url},#{gender},#{profile},#{add_time},#{correct_time},#{status},#{isuse})
+        (#{id},#{uName},#{uPassword},#{uUrl},#{uGender},#{profile},#{addtime},#{correcttime},#{status},#{isuse})
     </insert>
-<!--    User findUsername(String username);-->
+    <!--    查询用户名是否重复-->
+    <!--    User findUsername(String username);-->
     <select id="findUsername" resultType="com.example.demo.bean.User">
-        select * from t_user where u_name=#{usernmae}
+        select * from t_user where u_name=#{username} and status = 0
     </select>
-<!--    User findByUsername(User user);-->
-    <select id="findByUsername" resultType="com.example.demo.bean.User">
+    <!--    登录-->
+    <!--    User findByUsername(User user);-->
+    <select id="login" resultType="com.example.demo.bean.User">
         select * from t_user where u_name=#{username} and u_password=#{password}
     </select>
+    <!--    查询全部有效用户
+         ResponseData<List<User>> validUser();-->
+    <select id="validUser" resultType="com.example.demo.bean.User">
+        select * from t_user where isuse = 0 and status = 0
+    </select>
+    <!--    删除用户 通过用户名删除用户(假删除)
+        ResponseData<User> deleteUser(String username,String password);-->
+    <update id="deleteUser">
+        update t_user set status=1 where u_name=#{username} and u_password=#{password}
+    </update>
+    <!-- 更改个人信息
+    ResponseData<Integer> changeMessage(User user);-->
+    <update id="changeMessage">
+       UPDATE
+        t_user
+        SET
+        u_name = #{newUsername},
+        u_gender = #{gender},
+        u_url = #{uUrl},
+        profile = #{profile},
+        correcttime = #{correcttime}
+        WHERE
+	    u_name = #{uName} and u_password = #{uPassword} and status = 0
+    </update>
+
+    <!--
+    修改密码通过id和账户名密码修改
+     int changPassword(@Param("user") User user,@Param("newPassword") String newPassword);-->
+    <update id="changePassword">
+        UPDATE
+        t_user
+        SET
+          u_password = #{newPassword},
+          correcttime = #{correcttime}
+
+        WHERE
+	    u_name = #{uName} and u_password = #{uPassword} and status = 0
+</update>
 
 </mapper>
