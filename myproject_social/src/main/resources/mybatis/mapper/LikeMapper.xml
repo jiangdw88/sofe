@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.LikeMapper">
+<!--    List myLikeDynamic(String userId);-->
+<!--    查询本人点赞的动态-->
+<!--    返回类型为当条动态-->
+    <select id="myLikeDynamic" resultType="com.example.demo.bean.LikeIdAndDynamic">
+        SELECT
+	        *
+        FROM
+	    t_like
+	    LEFT JOIN t_dynamic ON t_like.likeperson_id = t_dynamic.d_id
+        WHERE
+	    t_like.user_id = #{userId} and t_like.status = 0
+    </select>
+<!--点赞表中本人id的数量
+Response<Integer> myCountByLike(String likePersonId);-->
+    <select id="myCountByLike" resultType="java.lang.Integer">
+        select count(*) from t_like where likeperson_id=#{likePersonId} and status = 0
+    </select>
+
+    <!--我点赞的数量
+Response<Integer> myCountByLike(String userId);-->
+    <select id="myCountLike" resultType="java.lang.Integer">
+        select count(*) from t_like where user_id=#{userId} and status = 0
+    </select>
+<!--    向点赞表存储信息
+int Like(Like like);-->
+    <insert id="Like" parameterType="com.example.demo.bean.Like">
+        insert into t_like
+        (like_id,likeperson_id,user_id,like_time,status)
+        values
+        (#{likeId},#{likepersonId},#{userId},#{likeTime},0)
+    </insert>
+<!--    //取消点赞动态
+ ResponseData<Integer> deleteLike(String likeId,String userId);
+ -->
+    <update id="deleteLike">
+        update t_like set status=1 where like_id = #{likeId} and user_id = #{userId}
+    </update>
+</mapper>
