@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.CommentMapper">
+<!--	//    评论id，被评论动态id，被评论人id，本人id，评论内容，评论时间
+    ResponseData<Integer> Comment(Comment comment);-->
+	<insert id="Comment" parameterType="com.example.demo.bean.Comment">
+		insert into t_comment
+		values
+		(#{commentId},#{uId},#{dId},#{comment},#{commentTime},0,#{userId})
+	</insert>
+
+<select id="myCommentAndDynamic" resultType="com.example.demo.bean.CommentAndDynamic">
+SELECT
+	*
+FROM
+	t_comment
+	LEFT JOIN t_dynamic ON t_comment.d_id = t_dynamic.d_id
+WHERE
+	t_dynamic.d_id = (
+	SELECT
+		d_id
+	FROM
+		t_comment
+WHERE
+	user_id = #{userId} AND status = 0) AND t_dynamic.status = 0
+	</select>
+<!--	 //    通过本人用户id删除本人评论
+    ResponseData<Integer> deleteComment(String commentId);-->
+	<update id="deleteComment">
+			UPDATE
+			t_comment
+            SET STATUS = 1
+            WHERE
+	        comment_id =#{commentId}
+	</update>
+</mapper>
