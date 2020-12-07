@@ -25,6 +25,6 @@
             UPDATE t_dynamic
             SET STATUS = 1
             WHERE
-	        d_id =#{id}
+	        d_id = #{id}
     </update>
 </mapper>

@@ -20,7 +20,9 @@ public enum EnumCode {
 //    新旧密码一致
     SAME_PASSWORD(5008,"新密码和原密码输入一致,请重新输入!"),
 //    发布动态失败
-    ERROR_RELEASE(5009,"发布失败");
+    ERROR_RELEASE(5009,"发布失败"),
+//    评论动态已删除
+    ERROR_COMMENT(5010,"动态已删除评论失败");
     // 定义的枚举常量属性。
     private int code;// 状态码
     private String message;// 描述

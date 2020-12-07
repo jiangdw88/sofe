@@ -4,7 +4,7 @@ package com.example.demo.bean;
 public class Dynamic {
     //    动态表id
     private String dId;
-    //    动态表头
+    //    动态标题
     private String title;
     //    动态内容
     private String content;

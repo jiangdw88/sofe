@@ -52,7 +52,6 @@
         SET
           u_password = #{newPassword},
           correcttime = #{correcttime}
-
         WHERE
 	    u_name = #{uName} and u_password = #{uPassword} and status = 0
 </update>
