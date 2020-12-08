@@ -1,5 +1,6 @@
 package com.example.demo.controller.imp;
 
+import com.example.demo.bean.NewMessage;
 import com.example.demo.bean.User;
 import com.example.demo.controller.UserController;
 import com.example.demo.service.imp.UserServiceImpl;
@@ -35,6 +36,7 @@ public class UserControllerImpl implements UserController {
         ResponseData<Integer> registerCode = userService.register(user);
         return registerCode;
     }
+
     @ResponseBody
     @ApiOperation(value = "login", notes = "登录接口")
     @PostMapping("/login")
@@ -52,24 +54,49 @@ public class UserControllerImpl implements UserController {
         List<User> listResponseData = userService.validUser();
         return listResponseData;
     }
+
     @ResponseBody
     @ApiOperation(value = "deleteUser", notes = "通过用户名删除用户")
     @PostMapping("/deleteUser")
     @Override
-    public ResponseData<Integer> deleteUser(String username,String password) {
-        ResponseData<Integer> integerResponseData = userService.deleteUser(username,password);
+    public ResponseData<Integer> deleteUser(String username, String password) {
+        ResponseData<Integer> integerResponseData = userService.deleteUser(username, password);
         return integerResponseData;
     }
+
+
     @ResponseBody
-    @ApiOperation(value = "changeMessage", notes = "更改个人信息")
+    @ApiOperation(value = "changeMessage", notes = "更改用户名")
     @PostMapping("/changeMessage")
     @Override
-    public ResponseData<Integer> changeMessage(User user,String newUsername) {
-        System.out.println(newUsername);
-        System.out.println(user);
-        ResponseData<Integer> integerResponseData = userService.changeMessage(user,newUsername);
-        return integerResponseData;
+    public ResponseData<Integer> changeMessage(User user, String newUsername) {
+        return userService.changeMessage(user,newUsername);
     }
+
+    @ResponseBody
+    @ApiOperation(value = "changeUrl", notes = "更改头像")
+    @PostMapping("/changeUrl")
+    @Override
+    public ResponseData<Integer> changeUrl(NewMessage newMessage) {
+        return userService.changeUrl(newMessage);
+    }
+
+    @ResponseBody
+    @ApiOperation(value = "changeProfile", notes = "更改个人简介")
+    @PostMapping("/changeProfile")
+    @Override
+    public ResponseData<Integer> changeProfile(NewMessage newMessage) {
+        return userService.changeProfile(newMessage);
+    }
+
+    @ResponseBody
+    @ApiOperation(value = "changeGender", notes = "更改性别")
+    @PostMapping("/changeGender")
+    @Override
+    public ResponseData<Integer> changeGender(NewMessage newMessage) {
+        return userService.changeGender(newMessage);
+    }
+
     @ResponseBody
     @ApiOperation(value = "changPassword", notes = "修改密码")
     @PostMapping("/changPassword")

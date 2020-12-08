@@ -1,5 +1,7 @@
 package com.example.demo.mapper;
+import com.example.demo.bean.NewMessage;
 import com.example.demo.bean.User;
+import com.util.ResponseData;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import java.util.List;
@@ -23,7 +25,15 @@ public interface UserMapper {
      * 10.修改性别-》更新修改时间
      * 通过用户名 密码修改个人昵称 头像 个人简介 性别
      */
-    int changeMessage(@Param("user") User user,@Param("newUsername") String newUsername);
+
+    int changeMessage(@Param("correcttime")String correcttime, @Param("newUsername") String newUsername,@Param("uName") String uName,@Param("id") String id);
+
+    //    8.修改头像（url）-》更新修改时间
+    int changeUrl(NewMessage newMessage);
+    //9.修改个人简介-》更新修改时间
+    int changeProfile(NewMessage newMessage);
+    //    10.修改性别-》更新修改时间
+    int changeGender(NewMessage newMessage);
     /**
      * 修改密码
      * 通过 id 账户名和旧密码对新密码进行修改

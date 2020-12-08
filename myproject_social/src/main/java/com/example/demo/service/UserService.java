@@ -1,5 +1,6 @@
 package com.example.demo.service;
 
+import com.example.demo.bean.NewMessage;
 import com.example.demo.bean.User;
 import com.util.ResponseData;
 import org.apache.ibatis.annotations.Param;
@@ -27,7 +28,13 @@ public interface UserService {
      * 9.修改个人简介-》更新修改时间
      * 10.修改性别-》更新修改时间
      */
-    ResponseData<Integer> changeMessage(User user,String newUsername);
+    ResponseData<Integer> changeMessage(@Param("user") User user,@Param("newUsername") String newUsername);
+//    8.修改头像（url）-》更新修改时间
+    ResponseData<Integer> changeUrl(NewMessage newMessage);
+    //9.修改个人简介-》更新修改时间
+    ResponseData<Integer> changeProfile(NewMessage newMessage);
+//    10.修改性别-》更新修改时间
+    ResponseData<Integer> changeGender(NewMessage newMessage);
 
     /**
      * 修改密码

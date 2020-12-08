@@ -1,0 +1,82 @@
+package com.example.demo.bean;
+
+public class NewMessage {
+    private String id;
+    private String correcttime;
+    private String newGender;
+    private String newUrl;
+    private String newProfile;
+    private String newUsername;
+
+    public NewMessage() {
+    }
+
+    public NewMessage(String id, String correcttime, String newGender, String newUrl, String newProfile, String newUsername) {
+        this.id = id;
+        this.correcttime = correcttime;
+        this.newGender = newGender;
+        this.newUrl = newUrl;
+        this.newProfile = newProfile;
+        this.newUsername = newUsername;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getCorrecttime() {
+        return correcttime;
+    }
+
+    public void setCorrecttime(String correcttime) {
+        this.correcttime = correcttime;
+    }
+
+    public String getNewGender() {
+        return newGender;
+    }
+
+    public void setNewGender(String newGender) {
+        this.newGender = newGender;
+    }
+
+    public String getNewUrl() {
+        return newUrl;
+    }
+
+    public void setNewUrl(String newUrl) {
+        this.newUrl = newUrl;
+    }
+
+    public String getNewProfile() {
+        return newProfile;
+    }
+
+    public void setNewProfile(String newProfile) {
+        this.newProfile = newProfile;
+    }
+
+    @Override
+    public String toString() {
+        return "NewMessage{" +
+                "id='" + id + '\'' +
+                ", correcttime='" + correcttime + '\'' +
+                ", newGender='" + newGender + '\'' +
+                ", newUrl='" + newUrl + '\'' +
+                ", newProfile='" + newProfile + '\'' +
+                ", newUsername='" + newUsername + '\'' +
+                '}';
+    }
+
+    public String getNewUsername() {
+        return newUsername;
+    }
+
+    public void setNewUsername(String newUsername) {
+        this.newUsername = newUsername;
+    }
+}

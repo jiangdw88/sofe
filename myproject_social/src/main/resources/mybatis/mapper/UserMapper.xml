@@ -28,20 +28,52 @@
     <update id="deleteUser">
         update t_user set status=1 where u_name=#{username} and u_password=#{password}
     </update>
-    <!-- 更改个人信息
-    ResponseData<Integer> changeMessage(User user);-->
+    <!-- 更改用户名
+    ResponseData<Integer> changeMessage(User user,String newUsername);-->
     <update id="changeMessage">
        UPDATE
         t_user
         SET
         u_name = #{newUsername},
-        u_gender = #{gender},
-        u_url = #{uUrl},
-        profile = #{profile},
         correcttime = #{correcttime}
         WHERE
-	    u_name = #{uName} and u_password = #{uPassword} and status = 0
+	    id = #{id} and status = 0
     </update>
+<!--       ResponseData<Integer> changeMessage(User user,String newUsername);
+    //    8.修改头像（url）-》更新修改时间
+    ResponseData<Integer> changeUrl(User user,String newUrl);
+    //9.修改个人简介-》更新修改时间
+    ResponseData<Integer> changeProfile(User user,String newProfile);
+    //    10.修改性别-》更新修改时间
+    ResponseData<Integer> changeGender(User user,String newGender);-->
+    <update id="changeUrl">
+       UPDATE
+        t_user
+        SET
+        u_url = #{newUrl},
+        correcttime = #{correcttime}
+        WHERE
+	    id = #{id} and status = 0
+    </update>
+    <update id="changeProfile">
+       UPDATE
+        t_user
+        SET
+        profile = #{newProfile},
+        correcttime = #{correcttime}
+        WHERE
+	    id = #{id} and status = 0
+    </update>
+    <update id="changeGender">
+       UPDATE
+        t_user
+        SET
+        u_gender = #{newGender},
+        correcttime = #{correcttime}
+        WHERE
+	    id = #{id} and status = 0
+    </update>
+
 
     <!--
     修改密码通过id和账户名密码修改

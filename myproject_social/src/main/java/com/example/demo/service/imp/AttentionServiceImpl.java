@@ -9,6 +9,8 @@ import com.util.UUIDAndTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class AttentionServiceImpl implements AttentionService {
     @Autowired
@@ -28,5 +30,26 @@ public class AttentionServiceImpl implements AttentionService {
             System.out.println(EnumCode.SYSTEM_ERROR.getMessage());
             return ResponseData.error(EnumCode.SYSTEM_ERROR);
         }
+    }
+//我的关注
+    @Override
+    public int myAttention(String userId) {
+        int myAttentionCount = attentionMapper.myAttention(userId);
+        System.out.println("我关注的数量:" + myAttentionCount);
+        return myAttentionCount;
+    }
+//我的粉丝数
+    @Override
+    public int beAttention(String uId) {
+        int beAttentionCount = attentionMapper.beAttention(uId);
+        System.out.println("我的粉丝数:" + beAttentionCount);
+        return beAttentionCount;
+    }
+//我关注的人列表
+    @Override
+    public List myAttentionList(String userId) {
+        List myAttentionList = attentionMapper.myAttentionList(userId);
+        System.out.println(myAttentionList);
+        return myAttentionList;
     }
 }

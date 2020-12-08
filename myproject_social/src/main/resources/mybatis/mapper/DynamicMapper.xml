@@ -10,17 +10,18 @@
     </insert>
     <!--  查询个人动态
         List<Dynamic> myDynamic(String id);-->
-    <select id="myDynamic" resultType="com.example.demo.bean.Dynamic">
-              SELECT
-	    title,content,sort_id,d_id,user_id
-        FROM
-	t_dynamic
-	    LEFT JOIN t_user ON t_user.id = t_dynamic.d_id
-        WHERE
+    <select id="myDynamic" resultType="com.example.demo.bean.DynamicAndSort">
+        SELECT
+	*
+FROM
+	t_dynamic,
+	t_sort
+WHERE
 	t_dynamic.user_id = #{id}
+	AND t_dynamic.sort_id = t_sort.sort_id
     </select>
-<!--     删除本人动态假删除
-    int deleteDynamic(String id);-->
+    <!--     删除本人动态假删除
+        int deleteDynamic(String id);-->
     <update id="deleteDynamic">
             UPDATE t_dynamic
             SET STATUS = 1

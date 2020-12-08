@@ -1,5 +1,6 @@
 package com.example.demo.service.imp;
 
+import com.example.demo.bean.NewMessage;
 import com.example.demo.bean.User;
 import com.example.demo.mapper.UserMapper;
 import com.example.demo.service.UserService;
@@ -106,12 +107,66 @@ public class UserServiceImpl implements UserService {
 
     }
 
-    //  更改个人信息
+    //更改用户名
     @Override
     public ResponseData<Integer> changeMessage(User user, String newUsername) {
-        //        设置更改时间
+        String regex = "^[a-zA-Z0-9_]{1,}$";
+        String username = user.getuName();
         user.setCorrecttime(UUIDAndTime.getTime());
-        int code = userMapper.changeMessage(user, newUsername);
+        System.out.println(username);
+//        首先验证输入的新用户名和原用户名是否一样 如果不一样调用方法存入数据
+        if (!username.equals(newUsername) && newUsername.matches(regex)) {
+            int code = userMapper.changeMessage(user.getCorrecttime(),newUsername,user.getuName(),user.getId());
+//            如果正确存入数据库
+            if (code >= 1) {
+                System.out.println("更改成功" + user);
+                return ResponseData.success(code);
+//               否则输出错误信息
+            } else {
+                System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
+                return ResponseData.error(EnumCode.PARAMETER_ERROR);
+            }
+//           如果输入用户名与格式都不正确的情况下输出错误信息
+        } else {
+            System.out.println(EnumCode.CHANGEMESSAGE_ERROR.getMessage());
+            return ResponseData.error(EnumCode.CHANGEMESSAGE_ERROR);
+        }
+    }
+
+
+    //更改头像
+    @Override
+    public ResponseData<Integer> changeUrl(NewMessage newMessage) {
+        newMessage.setCorrecttime(UUIDAndTime.getTime());
+        int code = userMapper.changeUrl(newMessage);
+        if (code >= 1) {
+            System.out.println("修改成功");
+            return ResponseData.success(code);
+        } else {
+            System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
+            return ResponseData.error(EnumCode.PARAMETER_ERROR);
+        }
+    }
+
+    //更改个人简介
+    @Override
+    public ResponseData<Integer> changeProfile(NewMessage newMessage) {
+        newMessage.setCorrecttime(UUIDAndTime.getTime());
+        int code = userMapper.changeProfile(newMessage);
+        if (code >= 1) {
+            System.out.println("修改成功");
+            return ResponseData.success(code);
+        } else {
+            System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
+            return ResponseData.error(EnumCode.PARAMETER_ERROR);
+        }
+    }
+
+    //更改性别
+    @Override
+    public ResponseData<Integer> changeGender(NewMessage newMessage) {
+        newMessage.setCorrecttime(UUIDAndTime.getTime());
+        int code = userMapper.changeGender(newMessage);
         if (code >= 1) {
             System.out.println("修改成功");
             return ResponseData.success(code);
@@ -126,8 +181,9 @@ public class UserServiceImpl implements UserService {
 //    修改密码功能
 //        原密码
         String password = user.getuPassword();
+        System.out.println(password);
         //        对新密码格式效验 字母开头6-18位
-       String regex= "^[a-zA-Z0-9_]{1,}$";
+        String regex = "^[a-zA-Z0-9_]{1,}$";
 //        判断新密码格式是否正确
         if (!newPassword.matches(regex)) {
             System.out.println(EnumCode.USERORPASSWORD_ERROR.getMessage());
@@ -142,11 +198,11 @@ public class UserServiceImpl implements UserService {
             newPassword = DigestUtils.md5DigestAsHex(newPassword.getBytes());
             user.setCorrecttime(UUIDAndTime.getTime());
 //        code为状态码
-            System.out.println("service:"+user);
-            System.out.println("newPassword:"+newPassword);
-            System.out.println("password:"+password);
-            int code = userMapper.changePassword(newPassword,user.getCorrecttime(),user.getuName(),user.getuPassword());
-            System.out.println("service:"+user);
+            System.out.println("service:" + user);
+            System.out.println("newPassword:" + newPassword);
+            System.out.println("password:" + password);
+            int code = userMapper.changePassword(newPassword, user.getCorrecttime(), user.getuName(), user.getuPassword());
+            System.out.println("service:" + user);
             System.out.println(code);
             if (code >= 1) {
                 System.out.println("密码修改成功");

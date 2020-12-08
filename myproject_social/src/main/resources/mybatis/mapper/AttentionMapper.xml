@@ -3,8 +3,36 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.mapper.AttentionMapper">
-<!--    ResponseData<Integer> attention(Attention attention);-->
-<insert id="attention" parameterType="com.example.demo.bean.Attention">
+    <!--    ResponseData<Integer> attention(Attention attention);-->
+    <insert id="attention" parameterType="com.example.demo.bean.Attention">
     insert into t_attention values (#{attentionId},#{uId},#{userId},#{attentionTime},0)
 </insert>
+    <!--    //    我关注的人数量(关注数量)
+        int myAttention(String userId);-->
+    <select id="myAttention" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM `t_attention` WHERE user_id = #{userId} and status = 0
+    </select>
+    <!--我的粉丝数量关注我的人数量
+    int beAttention(String uId);-->
+    <select id="beAttention" resultType="java.lang.Integer">
+        select count(*) from t_attention where u_id = #{uId} and status = 0
+    </select>
+    <!--    List myAttentionList(String userId);-->
+    <select id="myAttentionList" resultType="com.example.demo.bean.User">
+        SELECT
+	*
+FROM
+	t_attention
+	LEFT JOIN t_user ON t_attention.u_id = t_user.id
+WHERE
+	t_attention.u_id = SOME(
+	SELECT
+		u_id
+	FROM
+		t_attention
+	WHERE
+	user_id = #{userId}
+	) AND t_attention.user_id=#{userId} AND t_attention.`status` = 0 AND t_user.`status` =
+0
+    </select>
 </mapper>

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/attention")
 @Api(value = "Attention")
@@ -27,5 +29,26 @@ public class AttentionControllerImpl implements AttentionController {
     public ResponseData<Integer> attention(Attention attention) {
         System.out.println(attention);
         return attentionService.attention(attention);
+    }
+    @ResponseBody
+    @ApiOperation(value = "myAttention",notes = "我关注的人数量")
+    @PostMapping("/myAttention")
+    @Override
+    public int myAttention(String userId) {
+        return attentionService.myAttention(userId);
+    }
+    @ResponseBody
+    @ApiOperation(value = "beAttention",notes = "我被关注的数量")
+    @PostMapping("/beAttention")
+    @Override
+    public int beAttention(String uId) {
+        return attentionService.beAttention(uId);
+    }
+    @ResponseBody
+    @ApiOperation(value = "myAttentionList",notes = "我关注的人列表")
+    @PostMapping("/myAttentionList")
+    @Override
+    public List myAttentionList(String userId) {
+        return attentionService.myAttentionList(userId);
     }
 }
