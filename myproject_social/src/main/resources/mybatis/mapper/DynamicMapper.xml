@@ -18,7 +18,7 @@ FROM
 	t_sort
 WHERE
 	t_dynamic.user_id = #{id}
-	AND t_dynamic.sort_id = t_sort.sort_id
+	AND t_dynamic.sort_id = t_sort.sort_id and t_dynamic.status = 0
     </select>
     <!--     删除本人动态假删除
         int deleteDynamic(String id);-->
