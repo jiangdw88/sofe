@@ -32,10 +32,15 @@ public class CommentServiceImpl implements CommentService {
     }
 //查款评论内容和评论动态
     @Override
-    public List myCommentAndDynamic(String userId) {
+    public ResponseData<List> myCommentAndDynamic(String userId) {
         List list = commentMapper.myCommentAndDynamic(userId);
-        System.out.println(list);
-        return list;
+        if (list.size() != 0){
+            System.out.println("查询成功" + list);
+            return ResponseData.success(list);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 //删除评论动态
     @Override

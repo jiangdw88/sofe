@@ -27,16 +27,15 @@ public class LikeControllerImpl implements LikeController {
     @ApiOperation(value = "myLikeDynamic",notes = "我点赞的动态")
     @PostMapping("/myLikeDynamic")
     @Override
-    public List myLikeDynamic(String userId) {
-        List likes = likeService.myLikeDynamic(userId);
-        return likes;
+    public ResponseData<List> myLikeDynamic(String userId) {
+        return likeService.myLikeDynamic(userId);
     }
 //我的动态被点赞的数量
     @ResponseBody
     @ApiOperation(value = ("myCountByLike"),notes = "我的动态被点赞数量")
     @PostMapping("/myCountByLike")
     @Override
-    public int myCountByLike(String likePersonId) {
+    public ResponseData<Integer> myCountByLike(String likePersonId) {
         return likeService.myCountByLike(likePersonId);
     }
 //    我点赞动态的数量
@@ -44,7 +43,7 @@ public class LikeControllerImpl implements LikeController {
     @ApiOperation(value = ("myCountLike"),notes = "我的点赞数量")
     @PostMapping("/myCountLike")
     @Override
-    public int myCountLike(String userId) {
+    public ResponseData<Integer> myCountLike(String userId) {
         return likeService.myCountLike(userId);
     }
 //    向点赞表内存储数据

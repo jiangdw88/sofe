@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.bean.Dynamic;
+import com.example.demo.bean.DynamicAndSort;
 import com.util.ResponseData;
 
 import java.util.List;
@@ -9,7 +10,13 @@ public interface DynamicController {
     //    发布动态信息
     ResponseData<Integer> releaseNews(Dynamic dynamic);
     //    查询个人动态
-    List<Dynamic> myDynamic(String id);
+    ResponseData<List<Dynamic>> myDynamic(String id);
     //    删除本人动态
     ResponseData<Integer> deleteDynamic(String id);
+    //    按照分类查询10分钟内的最新动态
+    ResponseData<List<DynamicAndSort>> newDynamic(String sortId, int minute);
+    //按照分类id查询动态并从大到小输出
+    ResponseData<List<DynamicAndSort>> hotDynamic(String sortId);
+    //    按照分类模糊查询（标题）动态
+    ResponseData<List<DynamicAndSort>> likeKeyDynamic(String keyWords);
 }

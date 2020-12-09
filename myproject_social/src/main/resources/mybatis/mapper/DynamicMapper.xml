@@ -28,4 +28,25 @@ WHERE
             WHERE
 	        d_id = #{id}
     </update>
+<!--    //    按照分类查询10分钟内的最新动态
+    ResponseData<List<DynamicAndSort>> newDynamic(String sortId, int minute);-->
+    <select id="newDynamic" resultType="com.example.demo.bean.DynamicAndSort">
+        SELECT * FROM t_dynamic,t_sort WHERE release_time > DATE_SUB(NOW(), INTERVAL #{minute} MINUTE)AND t_dynamic.sort_id = t_sort.sort_id and t_dynamic.sort_id = #{sortId} and t_dynamic.status = 0
+    </select>
+<!--     //按照分类id查询动态并从大到小输出
+    ResponseData<List<DynamicAndSort>> hotDynamic(String sortId);-->
+    <select id="hotDynamic" resultType="com.example.demo.bean.DynamicAndSort">
+        SELECT
+            *
+        FROM
+            t_dynamic
+                LEFT JOIN ( SELECT count( t_like.likeperson_id ) likecount, t_like.likeperson_id FROM t_like GROUP BY t_like.likeperson_id ) a ON t_dynamic.d_id = a.likeperson_id WHERE t_dynamic.sort_id = #{sortId} and t_dynamic.status = 0
+        ORDER BY
+            a.likecount DESC
+    </select>
+<!--        //    按照分类模糊查询（标题）动态
+    ResponseData<List<DynamicAndSort>> likeKeyDynamic(String keyWords);-->
+    <select id="likeKeyDynamic" resultType="com.example.demo.bean.DynamicAndSort">
+        SELECT * FROM t_dynamic,t_sort WHERE  t_dynamic.sort_id = t_sort.sort_id and content like '%${keyWords}%' OR title like '%${keyWords}%' and t_dynamic.status = 0
+    </select>
 </mapper>

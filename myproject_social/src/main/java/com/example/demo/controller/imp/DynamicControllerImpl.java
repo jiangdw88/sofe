@@ -1,6 +1,7 @@
 package com.example.demo.controller.imp;
 
 import com.example.demo.bean.Dynamic;
+import com.example.demo.bean.DynamicAndSort;
 import com.example.demo.controller.DynamicController;
 import com.example.demo.service.imp.DynamicServiceImpl;
 import com.util.ResponseData;
@@ -34,9 +35,8 @@ public class DynamicControllerImpl implements DynamicController {
     @ApiOperation(value = "myDynamic",notes = "我的动态")
     @PostMapping("/myDynamic")
     @Override
-    public List<Dynamic> myDynamic(String id) {
-        List<Dynamic> dynamicList = dynamicService.myDynamic(id);
-        return dynamicList;
+    public ResponseData<List<Dynamic>> myDynamic(String id) {
+        return dynamicService.myDynamic(id);
     }
     @ResponseBody
     @ApiOperation(value = "deleteDynamic",notes = "删除动态")
@@ -45,5 +45,26 @@ public class DynamicControllerImpl implements DynamicController {
     public ResponseData<Integer> deleteDynamic(String id) {
         return dynamicService.deleteDynamic(id);
 
+    }
+    @ResponseBody
+    @ApiOperation(value = "newDynamic",notes = "最新动态")
+    @PostMapping("/newDynamic")
+    @Override
+    public ResponseData<List<DynamicAndSort>> newDynamic(String sortId, int minute) {
+        return dynamicService.newDynamic(sortId, minute);
+    }
+    @ResponseBody
+    @ApiOperation(value = "hotDynamic",notes = "热门动态")
+    @PostMapping("/hotDynamic")
+    @Override
+    public ResponseData<List<DynamicAndSort>> hotDynamic(String sortId) {
+        return dynamicService.hotDynamic(sortId);
+    }
+    @ResponseBody
+    @ApiOperation(value = "likeKeyDynamic",notes = "输入关键字搜索")
+    @PostMapping("/likeKeyDynamic")
+    @Override
+    public ResponseData<List<DynamicAndSort>> likeKeyDynamic(String keyWords) {
+        return dynamicService.likeKeyDynamic(keyWords);
     }
 }

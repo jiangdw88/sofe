@@ -34,21 +34,21 @@ public class AttentionControllerImpl implements AttentionController {
     @ApiOperation(value = "myAttention",notes = "我关注的人数量")
     @PostMapping("/myAttention")
     @Override
-    public int myAttention(String userId) {
+    public ResponseData<Integer> myAttention(String userId) {
         return attentionService.myAttention(userId);
     }
     @ResponseBody
     @ApiOperation(value = "beAttention",notes = "我被关注的数量")
     @PostMapping("/beAttention")
     @Override
-    public int beAttention(String uId) {
+    public ResponseData<Integer> beAttention(String uId) {
         return attentionService.beAttention(uId);
     }
     @ResponseBody
     @ApiOperation(value = "myAttentionList",notes = "我关注的人列表")
     @PostMapping("/myAttentionList")
     @Override
-    public List myAttentionList(String userId) {
+    public ResponseData<List> myAttentionList(String userId) {
         return attentionService.myAttentionList(userId);
     }
 }

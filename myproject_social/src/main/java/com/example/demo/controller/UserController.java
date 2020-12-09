@@ -11,7 +11,7 @@ import java.util.Map;
 public interface UserController {
     ResponseData<Integer> register(User user);
     ResponseData<User> login(String username, String password);
-    List<User> validUser();
+    ResponseData<List<User>> validUser();
     ResponseData<Integer> deleteUser(String username,String password);
 //    更改用户名
     ResponseData<Integer> changeMessage(User user,String newUsername);

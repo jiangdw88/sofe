@@ -17,7 +17,7 @@ public interface UserService {
     ResponseData<User> login(String username, String password);
 
     //     查询全部有效用户
-    List<User> validUser();
+    ResponseData<List<User>> validUser();
 
     //     删除用户(假删除)
     ResponseData<Integer> deleteUser(String username,String password);

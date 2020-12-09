@@ -10,11 +10,11 @@ public interface AttentionController {
     ResponseData<Integer> attention(Attention attention);
 
     //    我关注的人数量(关注数量)
-    int myAttention(String userId);
+    ResponseData<Integer> myAttention(String userId);
 
     //我被关注的数量(我的粉丝数)
-    int beAttention(String uId);
+    ResponseData<Integer> beAttention(String uId);
 
     //我关注的用户(返回用户列表)
-    List myAttentionList(String userId);
+    ResponseData<List> myAttentionList(String userId);
 }

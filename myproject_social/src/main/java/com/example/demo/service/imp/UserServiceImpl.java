@@ -85,11 +85,14 @@ public class UserServiceImpl implements UserService {
 
     //查找全部可用用户
     @Override
-    public List<User> validUser() {
+    public ResponseData<List<User>> validUser() {
         List<User> userList = userMapper.validUser();
-        System.out.println(userList);
-        return userList;
-
+        if (userList.size() != 0){
+           return ResponseData.success(userList);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 
     //删除用户功能

@@ -18,24 +18,39 @@ public class LikeServiceImpl implements LikeService {
     LikeMapper likeMapper;
     @Override
 //    查询本人的点赞动态
-    public List myLikeDynamic(String userId) {
+    public ResponseData<List> myLikeDynamic(String userId) {
         List likes = likeMapper.myLikeDynamic(userId);
-        System.out.println(likes);
-        return likes;
+        if (likes.size() != 0){
+            System.out.println(likes);
+            return ResponseData.success(likes);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 //查询我的动态有多少条赞
     @Override
-    public int myCountByLike(String likePersonId) {
+    public ResponseData<Integer> myCountByLike(String likePersonId) {
         int count = likeMapper.myCountByLike(likePersonId);
-        System.out.println(count);
-        return count;
+        if (count >= 0){
+            System.out.println(count);
+            return ResponseData.success(count);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 //查询我点了多少条赞
     @Override
-    public int myCountLike(String userId) {
+    public ResponseData<Integer> myCountLike(String userId) {
         int count = likeMapper.myCountLike(userId);
-        System.out.println(count);
-        return count;
+        if (count >= 0){
+            System.out.println(count);
+            return ResponseData.success(count);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
     //点赞表数据
     @Override

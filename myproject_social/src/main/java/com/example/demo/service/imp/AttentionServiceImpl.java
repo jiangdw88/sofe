@@ -33,23 +33,38 @@ public class AttentionServiceImpl implements AttentionService {
     }
 //我的关注
     @Override
-    public int myAttention(String userId) {
+    public ResponseData<Integer> myAttention(String userId) {
         int myAttentionCount = attentionMapper.myAttention(userId);
-        System.out.println("我关注的数量:" + myAttentionCount);
-        return myAttentionCount;
+        if (myAttentionCount >= 0){
+            System.out.println(myAttentionCount);
+            return ResponseData.success(myAttentionCount);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 //我的粉丝数
     @Override
-    public int beAttention(String uId) {
+    public ResponseData<Integer> beAttention(String uId) {
         int beAttentionCount = attentionMapper.beAttention(uId);
-        System.out.println("我的粉丝数:" + beAttentionCount);
-        return beAttentionCount;
+        if (beAttentionCount >= 0){
+            System.out.println(beAttentionCount);
+            return ResponseData.success(beAttentionCount);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 //我关注的人列表
     @Override
-    public List myAttentionList(String userId) {
+    public ResponseData<List> myAttentionList(String userId) {
         List myAttentionList = attentionMapper.myAttentionList(userId);
-        System.out.println(myAttentionList);
-        return myAttentionList;
+        if (myAttentionList.size() != 0){
+            System.out.println(myAttentionList);
+            return ResponseData.success(myAttentionList);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 }

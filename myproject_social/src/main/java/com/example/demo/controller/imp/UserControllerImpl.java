@@ -50,9 +50,8 @@ public class UserControllerImpl implements UserController {
     @ApiOperation(value = "validUser", notes = "查询有效用户")
     @PostMapping("/validUser")
     @Override
-    public List<User> validUser() {
-        List<User> listResponseData = userService.validUser();
-        return listResponseData;
+    public ResponseData<List<User>> validUser() {
+        return userService.validUser();
     }
 
     @ResponseBody

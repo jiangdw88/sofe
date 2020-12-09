@@ -24,7 +24,11 @@ public enum EnumCode {
 //    评论动态已删除
     ERROR_COMMENT(5010,"动态已删除评论失败"),
 //    用户名与原用户名重复或格式不正确
-    CHANGEMESSAGE_ERROR(5011,"用户名重复或账号格式不正确,请输入长度在6~18之间，只能包含字母、数字和下划线!");
+    CHANGEMESSAGE_ERROR(5011,"用户名重复或账号格式不正确,请输入长度在6~18之间，只能包含字母、数字和下划线!"),
+//   查询失败 返回结果失败
+    FAIL_SEARCH(5012,"查询失败"),
+    //   查询失败 返回结果失败
+    FAIL_SEARCH_KEYWORDS(5013,"还没有符合条件的动态哦");
     // 定义的枚举常量属性。
     private int code;// 状态码
     private String message;// 描述

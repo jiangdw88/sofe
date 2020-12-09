@@ -35,7 +35,7 @@ public class CommentControllerImpl implements CommentController {
     @ApiOperation(value = "myCommentAndDynamic", notes = "我的评论和我评论动态")
     @PostMapping("/myCommentAndDynamic")
     @Override
-    public List myCommentAndDynamic(String userId) {
+    public ResponseData<List> myCommentAndDynamic(String userId) {
         return commentService.myCommentAndDynamic(userId);
     }
 //删除评论
