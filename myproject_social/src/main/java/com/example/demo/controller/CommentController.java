@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.bean.Comment;
+import com.example.demo.bean.CommentAndLike;
 import com.util.ResponseData;
 
 import javax.xml.ws.Response;
@@ -13,4 +14,6 @@ public interface CommentController {
     ResponseData<List> myCommentAndDynamic(String userId);
     //    通过本人用户id删除本人评论
     ResponseData<Integer> deleteComment(String commentId);
+    //   通过动态id 获取评论和点赞数
+    ResponseData<List<CommentAndLike>> getCommentAndLike(String dId);
 }

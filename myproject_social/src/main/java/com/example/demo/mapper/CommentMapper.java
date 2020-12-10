@@ -1,6 +1,7 @@
 package com.example.demo.mapper;
 
 import com.example.demo.bean.Comment;
+import com.example.demo.bean.CommentAndLike;
 import org.apache.ibatis.annotations.Mapper;
 
 import javax.xml.ws.Response;
@@ -28,4 +29,11 @@ public interface CommentMapper {
      * @return
      */
     int deleteComment(String commentId);
+
+    /**
+     * 动态查询根据动态id查询 评论和点赞数
+     * @param dId 动态id
+     * @return
+     */
+    List<CommentAndLike> getCommentAndLike(String dId);
 }

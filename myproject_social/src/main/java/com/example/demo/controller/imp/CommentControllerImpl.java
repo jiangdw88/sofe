@@ -1,6 +1,7 @@
 package com.example.demo.controller.imp;
 
 import com.example.demo.bean.Comment;
+import com.example.demo.bean.CommentAndLike;
 import com.example.demo.controller.CommentController;
 import com.example.demo.service.imp.CommentServiceImpl;
 import com.util.ResponseData;
@@ -45,5 +46,13 @@ public class CommentControllerImpl implements CommentController {
     @Override
     public ResponseData<Integer> deleteComment(String commentId) {
         return commentService.deleteComment(commentId);
+    }
+//  查询评论和点赞数
+    @ResponseBody
+    @ApiOperation(value = "getCommentAndLike", notes = "查询评论和点赞数")
+    @PostMapping("/getCommentAndLike")
+    @Override
+    public ResponseData<List<CommentAndLike>> getCommentAndLike(String dId) {
+        return commentService.getCommentAndLike(dId);
     }
 }

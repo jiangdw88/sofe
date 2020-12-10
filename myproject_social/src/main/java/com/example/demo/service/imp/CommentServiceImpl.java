@@ -1,6 +1,7 @@
 package com.example.demo.service.imp;
 
 import com.example.demo.bean.Comment;
+import com.example.demo.bean.CommentAndLike;
 import com.example.demo.mapper.CommentMapper;
 import com.example.demo.service.CommentService;
 import com.util.EnumCode;
@@ -30,31 +31,45 @@ public class CommentServiceImpl implements CommentService {
             return ResponseData.error(EnumCode.ERROR_RELEASE);
         }
     }
-//查款评论内容和评论动态
+
+    //查款评论内容和评论动态
     @Override
     public ResponseData<List> myCommentAndDynamic(String userId) {
         List list = commentMapper.myCommentAndDynamic(userId);
-        if (list.size() != 0){
+        if (list.size() != 0) {
             System.out.println("查询成功" + list);
             return ResponseData.success(list);
-        }else {
+        } else {
             System.out.println(EnumCode.FAIL_SEARCH.getMessage());
             return ResponseData.error(EnumCode.FAIL_SEARCH);
         }
     }
-//删除评论动态
+
+    //删除评论动态
     @Override
     public ResponseData<Integer> deleteComment(String commentId) {
         int code = commentMapper.deleteComment(commentId);
-        if (code >= 1){
+        if (code >= 1) {
             System.out.println("删除成功");
             return ResponseData.success(code);
-        }else{
+        } else {
             System.out.println(EnumCode.ERROR_COMMENT.getMessage());
             return ResponseData.error(EnumCode.ERROR_COMMENT);
         }
 
 
+    }
+
+    @Override
+    public ResponseData<List<CommentAndLike>> getCommentAndLike(String dId) {
+        List<CommentAndLike> commentAndLikeList = commentMapper.getCommentAndLike(dId);
+        if (commentAndLikeList.size() >= 0) {
+            System.out.println(commentAndLikeList);
+            return ResponseData.success(commentAndLikeList);
+        } else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 
 }

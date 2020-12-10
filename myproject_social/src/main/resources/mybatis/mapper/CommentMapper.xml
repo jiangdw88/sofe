@@ -35,4 +35,9 @@ WHERE
             WHERE
 	        comment_id =#{commentId}
 	</update>
+<!--	    //   通过动态id 获取评论和点赞数
+    ResponseData<List<CommentAndLike>> getCommentAndLike(String dId);-->
+	<select id="getCommentAndLike" resultType="com.example.demo.bean.CommentAndLike">
+		SELECT *,(SELECT count(*) FROM t_like WHERE t_like.likeperson_id = #{dId}) AS count FROM t_comment WHERE t_comment.u_id = #{dId} AND t_comment.status = 0
+	</select>
 </mapper>
