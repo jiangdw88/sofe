@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.bean.Comment;
 import com.example.demo.bean.CommentAndLike;
+import com.example.demo.bean.CommentAndUser;
 import com.util.ResponseData;
 
 import javax.xml.ws.Response;
@@ -20,4 +21,7 @@ public interface CommentService {
 
     //   通过动态id 获取评论和点赞数
     ResponseData<List<CommentAndLike>> getCommentAndLike(String dId);
+
+    //    根据评论表信息获取用户信息
+    ResponseData<List<CommentAndUser>> getCommentUserMessage(String dId);
 }

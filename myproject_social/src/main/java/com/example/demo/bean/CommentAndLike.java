@@ -15,7 +15,7 @@ public class CommentAndLike {
     //    评论时间
     private String commentTime;
     //    点赞数
-    private String count;
+    private int count;
 
     @Override
     public String toString() {
@@ -78,18 +78,18 @@ public class CommentAndLike {
         this.commentTime = commentTime;
     }
 
-    public String getCount() {
+    public int getCount() {
         return count;
     }
 
-    public void setCount(String count) {
+    public void setCount(int count) {
         this.count = count;
     }
 
     public CommentAndLike() {
     }
 
-    public CommentAndLike(String commentId, String uId, String dId, String userId, String comment, String commentTime, String count) {
+    public CommentAndLike(String commentId, String uId, String dId, String userId, String comment, String commentTime, int count) {
         this.commentId = commentId;
         this.uId = uId;
         this.dId = dId;

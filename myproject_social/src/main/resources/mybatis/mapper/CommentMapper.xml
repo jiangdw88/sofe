@@ -38,6 +38,12 @@ WHERE
 <!--	    //   通过动态id 获取评论和点赞数
     ResponseData<List<CommentAndLike>> getCommentAndLike(String dId);-->
 	<select id="getCommentAndLike" resultType="com.example.demo.bean.CommentAndLike">
-		SELECT *,(SELECT count(*) FROM t_like WHERE t_like.likeperson_id = #{dId}) AS count FROM t_comment WHERE t_comment.u_id = #{dId} AND t_comment.status = 0
+		SELECT *,(SELECT count(*) FROM t_like WHERE t_like.likeperson_id = #{dId}) AS count FROM t_comment WHERE t_comment.d_id = #{dId} AND t_comment.status = 0
 	</select>
+<!--通过评论表中用户id查找到评论用户的信息-->
+	<select id="getCommentUserMessage" resultType="com.example.demo.bean.CommentAndUser">
+		SELECT * FROM t_comment LEFT JOIN t_user ON t_comment.user_id = t_user.id WHERE
+			t_comment.d_id = #{dId} AND t_comment.`status` = 0 AND t_user.`status` = 0
+	</select>
+
 </mapper>

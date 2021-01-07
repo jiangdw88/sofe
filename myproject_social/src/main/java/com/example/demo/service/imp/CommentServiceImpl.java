@@ -2,6 +2,7 @@ package com.example.demo.service.imp;
 
 import com.example.demo.bean.Comment;
 import com.example.demo.bean.CommentAndLike;
+import com.example.demo.bean.CommentAndUser;
 import com.example.demo.mapper.CommentMapper;
 import com.example.demo.service.CommentService;
 import com.util.EnumCode;
@@ -32,7 +33,7 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
-    //查款评论内容和评论动态
+    //查看评论内容和评论动态
     @Override
     public ResponseData<List> myCommentAndDynamic(String userId) {
         List list = commentMapper.myCommentAndDynamic(userId);
@@ -67,6 +68,18 @@ public class CommentServiceImpl implements CommentService {
             System.out.println(commentAndLikeList);
             return ResponseData.success(commentAndLikeList);
         } else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
+    }
+
+    @Override
+    public ResponseData<List<CommentAndUser>> getCommentUserMessage(String dId) {
+        List<CommentAndUser> commentUserMessage = commentMapper.getCommentUserMessage(dId);
+        if (commentUserMessage.size() > 0){
+            System.out.println(commentUserMessage);
+            return ResponseData.success(commentUserMessage);
+        }else {
             System.out.println(EnumCode.FAIL_SEARCH.getMessage());
             return ResponseData.error(EnumCode.FAIL_SEARCH);
         }

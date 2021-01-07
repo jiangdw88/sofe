@@ -22,7 +22,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
 //    注册
-    public ResponseData<Integer> register(User user) {
+    public ResponseData<User> register(User user) {
         String password = user.getuPassword();
         String username = user.getuName();
 //        判断账户是否重复repead
@@ -56,7 +56,8 @@ public class UserServiceImpl implements UserService {
             System.out.println(user);
             int code = userMapper.addUser(user);
             if (code >= 1) {
-                return ResponseData.success(code);
+                System.out.println(user);
+                return ResponseData.success(user);
             } else {
                 System.out.println(EnumCode.USER_HAS_ERROR.getMessage());
                 return ResponseData.error(EnumCode.USER_HAS_ERROR);

@@ -31,9 +31,9 @@ public class UserControllerImpl implements UserController {
     @ApiOperation(value = "register", notes = "注册接口")
     @PostMapping("/register")
     @Override
-    public ResponseData<Integer> register(User user) {
+    public ResponseData<User> register(User user) {
         System.out.println(user);
-        ResponseData<Integer> registerCode = userService.register(user);
+        ResponseData<User> registerCode = userService.register(user);
         return registerCode;
     }
 
@@ -42,6 +42,7 @@ public class UserControllerImpl implements UserController {
     @PostMapping("/login")
     @Override
     public ResponseData<User> login(String username, String password) {
+        System.out.println("测试..........................");
         ResponseData<User> login = userService.login(username, password);
         return login;
     }

@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.bean.Comment;
 import com.example.demo.bean.CommentAndLike;
+import com.example.demo.bean.CommentAndUser;
 import org.apache.ibatis.annotations.Mapper;
 
 import javax.xml.ws.Response;
@@ -36,4 +37,6 @@ public interface CommentMapper {
      * @return
      */
     List<CommentAndLike> getCommentAndLike(String dId);
+//    根据评论表信息获取用户信息
+    List<CommentAndUser> getCommentUserMessage(String dId);
 }

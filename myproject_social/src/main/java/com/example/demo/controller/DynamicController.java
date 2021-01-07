@@ -2,6 +2,7 @@ package com.example.demo.controller;
 
 import com.example.demo.bean.Dynamic;
 import com.example.demo.bean.DynamicAndSort;
+import com.example.demo.bean.DynamicAndUser;
 import com.util.ResponseData;
 
 import java.util.List;
@@ -19,4 +20,8 @@ public interface DynamicController {
     ResponseData<List<DynamicAndSort>> hotDynamic(String sortId);
     //    按照分类模糊查询（标题）动态
     ResponseData<List<DynamicAndSort>> likeKeyDynamic(String keyWords);
+    //    获取全部动态
+    ResponseData<List<Dynamic>> getAllDynamic() ;
+    //根据动态id获取当前动态信息
+    ResponseData<List<DynamicAndUser>> getDynamicById(String dId);
 }

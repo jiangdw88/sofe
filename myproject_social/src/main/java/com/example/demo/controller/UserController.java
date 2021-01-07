@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface UserController {
-    ResponseData<Integer> register(User user);
+    ResponseData<User> register(User user);
     ResponseData<User> login(String username, String password);
     ResponseData<List<User>> validUser();
     ResponseData<Integer> deleteUser(String username,String password);

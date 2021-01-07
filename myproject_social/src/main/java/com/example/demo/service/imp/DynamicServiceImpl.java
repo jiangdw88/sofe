@@ -2,6 +2,7 @@ package com.example.demo.service.imp;
 
 import com.example.demo.bean.Dynamic;
 import com.example.demo.bean.DynamicAndSort;
+import com.example.demo.bean.DynamicAndUser;
 import com.example.demo.bean.User;
 import com.example.demo.mapper.DynamicMapper;
 import com.example.demo.service.DynamicService;
@@ -112,5 +113,28 @@ public class DynamicServiceImpl implements DynamicService {
             return ResponseData.error(EnumCode.FAIL_SEARCH_KEYWORDS);
         }
 
+    }
+
+    @Override
+    public ResponseData<List<Dynamic>> getAllDynamic() {
+        List<Dynamic> allDynamic = dynamicMapper.getAllDynamic();
+        if (allDynamic.size() != 0){
+            System.out.println(allDynamic);
+            return ResponseData.success(allDynamic);
+        }else {
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
+
+    }
+//通过动态id获取动态
+    @Override
+    public ResponseData<List<DynamicAndUser>> getDynamicById(String dId) {
+        List<DynamicAndUser> dynamicById = dynamicMapper.getDynamicById(dId);
+        if (dynamicById.size() != 0){
+            return ResponseData.success(dynamicById);
+        }else {
+            System.out.println(EnumCode.FAIL_SEARCH.getMessage());
+            return ResponseData.error(EnumCode.FAIL_SEARCH);
+        }
     }
 }

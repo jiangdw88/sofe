@@ -2,6 +2,7 @@ package com.example.demo.controller.imp;
 
 import com.example.demo.bean.Comment;
 import com.example.demo.bean.CommentAndLike;
+import com.example.demo.bean.CommentAndUser;
 import com.example.demo.controller.CommentController;
 import com.example.demo.service.imp.CommentServiceImpl;
 import com.util.ResponseData;
@@ -54,5 +55,12 @@ public class CommentControllerImpl implements CommentController {
     @Override
     public ResponseData<List<CommentAndLike>> getCommentAndLike(String dId) {
         return commentService.getCommentAndLike(dId);
+    }
+    @ResponseBody
+    @ApiOperation(value = "getCommentUserMessage", notes = "获取评论列表和评论用户信息")
+    @PostMapping("/getCommentUserMessage")
+    @Override
+    public ResponseData<List<CommentAndUser>> getCommentUserMessage(String dId) {
+        return commentService.getCommentUserMessage(dId);
     }
 }

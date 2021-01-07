@@ -2,16 +2,14 @@ package com.example.demo.controller.imp;
 
 import com.example.demo.bean.Dynamic;
 import com.example.demo.bean.DynamicAndSort;
+import com.example.demo.bean.DynamicAndUser;
 import com.example.demo.controller.DynamicController;
 import com.example.demo.service.imp.DynamicServiceImpl;
 import com.util.ResponseData;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -66,5 +64,20 @@ public class DynamicControllerImpl implements DynamicController {
     @Override
     public ResponseData<List<DynamicAndSort>> likeKeyDynamic(String keyWords) {
         return dynamicService.likeKeyDynamic(keyWords);
+    }
+    @ResponseBody
+    @ApiOperation(value = "getAllDynamic",notes = "查询全部动态")
+    @GetMapping("/getAllDynamic")
+    @Override
+    public ResponseData<List<Dynamic>> getAllDynamic() {
+        return dynamicService.getAllDynamic();
+    }
+
+    @ResponseBody
+    @ApiOperation(value = "getDynamicById",notes = "查询当前动态")
+    @PostMapping("/getDynamicById")
+    @Override
+    public ResponseData<List<DynamicAndUser>> getDynamicById(String dId) {
+        return dynamicService.getDynamicById(dId);
     }
 }

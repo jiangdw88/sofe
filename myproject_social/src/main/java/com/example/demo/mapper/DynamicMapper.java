@@ -2,6 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.bean.Dynamic;
 import com.example.demo.bean.DynamicAndSort;
+import com.example.demo.bean.DynamicAndUser;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +37,17 @@ public interface DynamicMapper {
      * @return
      */
     List<DynamicAndSort> likeKeyDynamic(@Param("keyWords") String keyWords);
+
+    /**
+     * 获取全部动态
+     * @return
+     */
+    List<Dynamic> getAllDynamic();
+
+    /**
+     * 根据动态id获取当前动态
+     * @param dId
+     * @return
+     */
+    List<DynamicAndUser> getDynamicById(String dId);
 }

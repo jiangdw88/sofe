@@ -11,7 +11,7 @@ import java.util.Map;
 
 public interface UserService {
     //     注册接口
-    ResponseData<Integer> register(User user);
+    ResponseData<User> register(User user);
 
     //     登录接口
     ResponseData<User> login(String username, String password);
@@ -41,5 +41,7 @@ public interface UserService {
      * 通过 id 账户名和旧密码对新密码进行修改
      */
     ResponseData<Integer> changePassword(User user,String newPassword);
+
+//    ResponseData<Integer> upLoadImag(String file);
 
 }

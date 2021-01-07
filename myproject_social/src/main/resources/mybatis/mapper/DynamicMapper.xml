@@ -49,4 +49,12 @@ WHERE
     <select id="likeKeyDynamic" resultType="com.example.demo.bean.DynamicAndSort">
         SELECT * FROM t_dynamic,t_sort WHERE  t_dynamic.sort_id = t_sort.sort_id and content like '%${keyWords}%' OR title like '%${keyWords}%' and t_dynamic.status = 0
     </select>
+<!--        ResponseData<List<Dynamic>> getAllDynamic() ;-->
+    <select id="getAllDynamic" resultType="com.example.demo.bean.DynamicAndUser">
+        select * from t_dynamic LEFT JOIN t_user ON t_dynamic.user_id = t_user.id where t_dynamic.status = 0
+    </select>
+<!--     ResponseData<List<DynamicAndUser>> getDynamicById(String dId);-->
+    <select id="getDynamicById" resultType="com.example.demo.bean.DynamicAndUser">
+        select * from t_dynamic LEFT JOIN t_user ON t_dynamic.user_id = t_user.id where t_dynamic.d_id = #{dId} and t_dynamic.status = 0
+    </select>
 </mapper>
