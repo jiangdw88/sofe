@@ -69,8 +69,8 @@ public class UserControllerImpl implements UserController {
     @ApiOperation(value = "changeMessage", notes = "更改用户名")
     @PostMapping("/changeMessage")
     @Override
-    public ResponseData<Integer> changeMessage(User user, String newUsername) {
-        return userService.changeMessage(user,newUsername);
+    public ResponseData<Integer> changeMessage(NewMessage newMessage) {
+        return userService.changeMessage(newMessage);
     }
 
     @ResponseBody
@@ -94,6 +94,7 @@ public class UserControllerImpl implements UserController {
     @PostMapping("/changeGender")
     @Override
     public ResponseData<Integer> changeGender(NewMessage newMessage) {
+        System.out.println(newMessage);
         return userService.changeGender(newMessage);
     }
 
@@ -101,9 +102,16 @@ public class UserControllerImpl implements UserController {
     @ApiOperation(value = "changPassword", notes = "修改密码")
     @PostMapping("/changPassword")
     @Override
-    public ResponseData<Integer> changePassword(User user, String newPassword) {
-        ResponseData<Integer> integerResponseData = userService.changePassword(user, newPassword);
+    public ResponseData<Integer> changePassword(NewMessage newMessage) {
+        ResponseData<Integer> integerResponseData = userService.changePassword(newMessage);
         return integerResponseData;
+    }
+    @ResponseBody
+    @ApiOperation(value = "getUserMessage", notes = "查询用户信息")
+    @PostMapping("/getUserMessage")
+    @Override
+    public ResponseData<List<User>> getUserMessage(String userId) {
+        return userService.getUserMessage(userId);
     }
 
 

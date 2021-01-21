@@ -26,7 +26,7 @@ public interface UserMapper {
      * 通过用户名 密码修改个人昵称 头像 个人简介 性别
      */
 
-    int changeMessage(@Param("correcttime")String correcttime, @Param("newUsername") String newUsername,@Param("uName") String uName,@Param("id") String id);
+    int changeMessage(NewMessage newMessage);
 
     //    8.修改头像（url）-》更新修改时间
     int changeUrl(NewMessage newMessage);
@@ -40,5 +40,12 @@ public interface UserMapper {
      */
     int changePassword(@Param("newPassword") String newPassword,@Param("user") User user);
 
-    int changePassword(@Param("newPassword")String newPassword, @Param("correcttime")String correcttime,@Param("uName") String uName, @Param("uPassword")String uPassword);
+    int changePassword(NewMessage newMessage);
+
+    /**
+     * 根据用户id查询用户的信息
+     * @param userId
+     * @return
+     */
+    List<User> getUserMessage(String userId);
 }

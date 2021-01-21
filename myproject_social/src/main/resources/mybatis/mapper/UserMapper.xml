@@ -86,7 +86,13 @@
           u_password = #{newPassword},
           correcttime = #{correcttime}
         WHERE
-	    u_name = #{uName} and u_password = #{uPassword} and status = 0
+	    id = #{id} and status = 0
 </update>
+<!--    //    根据用户名id查询用户信息-->
+<!--    ResponseData<List<User>> getUserMessage(String userId);-->
+    <select id="getUserMessage" resultType="com.example.demo.bean.User">
+        select * from t_user where id=#{userId} and status = 0
+    </select>
+
 
 </mapper>

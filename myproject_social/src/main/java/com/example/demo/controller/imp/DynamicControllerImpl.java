@@ -33,7 +33,8 @@ public class DynamicControllerImpl implements DynamicController {
     @ApiOperation(value = "myDynamic",notes = "我的动态")
     @PostMapping("/myDynamic")
     @Override
-    public ResponseData<List<Dynamic>> myDynamic(String id) {
+    public ResponseData<List<DynamicAndSort>> myDynamic(String id) {
+        System.out.println(id);
         return dynamicService.myDynamic(id);
     }
     @ResponseBody

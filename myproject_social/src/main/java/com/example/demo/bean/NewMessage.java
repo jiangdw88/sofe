@@ -3,21 +3,28 @@ package com.example.demo.bean;
 public class NewMessage {
     private String id;
     private String correcttime;
-    private String newGender;
+    private int newGender;
     private String newUrl;
     private String newProfile;
     private String newUsername;
+    private String userName;
+    private String newPassword;
 
-    public NewMessage() {
+    @Override
+    public String toString() {
+        return "NewMessage{" +
+                "id='" + id + '\'' +
+                ", correcttime='" + correcttime + '\'' +
+                ", newGender=" + newGender +
+                ", newUrl='" + newUrl + '\'' +
+                ", newProfile='" + newProfile + '\'' +
+                ", newUsername='" + newUsername + '\'' +
+                ", userName='" + userName + '\'' +
+                ", newPassword='" + newPassword + '\'' +
+                '}';
     }
 
-    public NewMessage(String id, String correcttime, String newGender, String newUrl, String newProfile, String newUsername) {
-        this.id = id;
-        this.correcttime = correcttime;
-        this.newGender = newGender;
-        this.newUrl = newUrl;
-        this.newProfile = newProfile;
-        this.newUsername = newUsername;
+    public NewMessage() {
     }
 
     public String getId() {
@@ -36,11 +43,11 @@ public class NewMessage {
         this.correcttime = correcttime;
     }
 
-    public String getNewGender() {
+    public int getNewGender() {
         return newGender;
     }
 
-    public void setNewGender(String newGender) {
+    public void setNewGender(int newGender) {
         this.newGender = newGender;
     }
 
@@ -60,23 +67,38 @@ public class NewMessage {
         this.newProfile = newProfile;
     }
 
-    @Override
-    public String toString() {
-        return "NewMessage{" +
-                "id='" + id + '\'' +
-                ", correcttime='" + correcttime + '\'' +
-                ", newGender='" + newGender + '\'' +
-                ", newUrl='" + newUrl + '\'' +
-                ", newProfile='" + newProfile + '\'' +
-                ", newUsername='" + newUsername + '\'' +
-                '}';
-    }
-
     public String getNewUsername() {
         return newUsername;
     }
 
     public void setNewUsername(String newUsername) {
         this.newUsername = newUsername;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    public NewMessage(String id, String correcttime, int newGender, String newUrl, String newProfile, String newUsername, String userName, String newPassword) {
+        this.id = id;
+        this.correcttime = correcttime;
+        this.newGender = newGender;
+        this.newUrl = newUrl;
+        this.newProfile = newProfile;
+        this.newUsername = newUsername;
+        this.userName = userName;
+        this.newPassword = newPassword;
     }
 }

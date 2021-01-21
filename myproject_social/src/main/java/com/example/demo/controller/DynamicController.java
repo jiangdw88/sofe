@@ -11,7 +11,7 @@ public interface DynamicController {
     //    发布动态信息
     ResponseData<Integer> releaseNews(Dynamic dynamic);
     //    查询个人动态
-    ResponseData<List<Dynamic>> myDynamic(String id);
+    ResponseData<List<DynamicAndSort>> myDynamic(String id);
     //    删除本人动态
     ResponseData<Integer> deleteDynamic(String id);
     //    按照分类查询10分钟内的最新动态

@@ -14,12 +14,15 @@ public interface UserController {
     ResponseData<List<User>> validUser();
     ResponseData<Integer> deleteUser(String username,String password);
 //    更改用户名
-    ResponseData<Integer> changeMessage(User user,String newUsername);
+    ResponseData<Integer> changeMessage(NewMessage newMessage);
     //    8.修改头像（url）-》更新修改时间
     ResponseData<Integer> changeUrl(NewMessage newMessage);
     //9.修改个人简介-》更新修改时间
     ResponseData<Integer> changeProfile(NewMessage newMessage);
     //    10.修改性别-》更新修改时间
     ResponseData<Integer> changeGender(NewMessage newMessage);
-    ResponseData<Integer> changePassword(User user,String newPassword);
+    //    更改密码
+    ResponseData<Integer> changePassword(NewMessage newMessage);
+    //    根据用户名id查询用户信息
+    ResponseData<List<User>> getUserMessage(String userId);
 }

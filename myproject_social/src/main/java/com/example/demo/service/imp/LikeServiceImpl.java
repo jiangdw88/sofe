@@ -52,7 +52,7 @@ public class LikeServiceImpl implements LikeService {
             return ResponseData.error(EnumCode.FAIL_SEARCH);
         }
     }
-    //点赞表数据
+    //点赞动态数据
     @Override
     public ResponseData<Integer> Like(Like like) {
         //        设置点赞表id

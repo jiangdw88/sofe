@@ -53,12 +53,14 @@ public class DynamicServiceImpl implements DynamicService {
      * @return
      */
     @Override
-    public ResponseData<List<Dynamic>> myDynamic(String id) {
-        List<Dynamic> dynamics = dynamicMapper.myDynamic(id);
+    public ResponseData<List<DynamicAndSort>> myDynamic(String id) {
+
+        List<DynamicAndSort> dynamics = dynamicMapper.myDynamic(id);
         if (dynamics.size() != 0){
             System.out.println("查询成功" + dynamics);
             return ResponseData.success(dynamics);
         }else {
+            System.out.println("id:"+id);
             System.out.println(EnumCode.FAIL_SEARCH.getMessage());
             return ResponseData.error(EnumCode.FAIL_SEARCH);
         }

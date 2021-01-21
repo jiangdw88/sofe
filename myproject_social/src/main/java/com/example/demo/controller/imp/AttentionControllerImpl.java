@@ -38,7 +38,7 @@ public class AttentionControllerImpl implements AttentionController {
         return attentionService.myAttention(userId);
     }
     @ResponseBody
-    @ApiOperation(value = "beAttention",notes = "我被关注的数量")
+    @ApiOperation(value = "beAttention",notes = "我被关注的数量(粉丝)")
     @PostMapping("/beAttention")
     @Override
     public ResponseData<Integer> beAttention(String uId) {
