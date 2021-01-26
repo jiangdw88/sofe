@@ -68,7 +68,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseData<User> login(String username, String password) {
 //        密码进加密
-        password = DigestUtils.md5DigestAsHex(password.getBytes());
+//        password = DigestUtils.md5DigestAsHex(password.getBytes());
         System.out.println(password);
 //        通过账户名 密码查找用户
         User byUsername = userMapper.login(username, password);
@@ -221,11 +221,15 @@ public class UserServiceImpl implements UserService {
 //                return ResponseData.error(EnumCode.CHANGEPASSWORD_FAIL);
 //            }
 //
+        newMessage.setCorrecttime(UUIDAndTime.getTime());
+//        newMessage.setCorrecttime("1");
+        String correcttime = newMessage.getCorrecttime();
+//        String newPassword = newMessage.getNewPassword();
+//        newMessage.setNewPassword(DigestUtils.md5DigestAsHex(newPassword.getBytes()));
+//        System.out.println(correcttime);
         int code = userMapper.changePassword(newMessage);
         if (code >= 1){
-            newMessage.setCorrecttime(UUIDAndTime.getTime());
-            String newPassword = newMessage.getNewPassword();
-            System.out.println("密码修改成功" + newPassword);
+            System.out.println("密码修改成功");
            return ResponseData.success(code);
         }else {
             return ResponseData.error(EnumCode.PARAMETER_ERROR);
@@ -235,17 +239,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResponseData<List<User>> getUserMessage(String userId) {
         List<User> userMessage = userMapper.getUserMessage(userId);
-        if (userMessage.size() > 0){
+        if (userMessage.size() > 0) {
             System.out.println(userMessage);
-            return  ResponseData.success(userMessage);
-        }else {
-            System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
-            return ResponseData.error(EnumCode.PARAMETER_ERROR);
+            return ResponseData.success(userMessage);
+        } else {
+              System.out.println(EnumCode.PARAMETER_ERROR.getMessage());
+              return ResponseData.error(EnumCode.PARAMETER_ERROR);
         }
     }
 }
-
-
-
-
-

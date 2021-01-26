@@ -6,7 +6,7 @@
     <!--    新增动态-->
     <!--     ResponseData<Integer> ReleaseNews(Dynamic dynamic);-->
     <insert id="releaseNews" parameterType="com.example.demo.bean.Dynamic">
-        insert into t_dynamic values (#{dId},#{title},#{content},#{releaseTime},#{status},#{sortId},#{userId})
+        insert into t_dynamic values (#{dId},#{title},#{content},#{releaseTime},#{status},#{sortId},#{userId},#{imgUrl})
     </insert>
     <!--  查询个人动态
         List<Dynamic> myDynamic(String id);-->

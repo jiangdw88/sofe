@@ -16,6 +16,11 @@ public class Dynamic {
     private String sortId;
     //    用户表id
     private String userId;
+//    图片连接
+    private String imgUrl;
+
+    public Dynamic() {
+    }
 
     @Override
     public String toString() {
@@ -27,6 +32,7 @@ public class Dynamic {
                 ", status=" + status +
                 ", sortId='" + sortId + '\'' +
                 ", userId='" + userId + '\'' +
+                ", imgUrl='" + imgUrl + '\'' +
                 '}';
     }
 
@@ -86,10 +92,15 @@ public class Dynamic {
         this.userId = userId;
     }
 
-    public Dynamic() {
+    public String getImgUrl() {
+        return imgUrl;
     }
 
-    public Dynamic(String dId, String title, String content, String releaseTime, int status, String sortId, String userId) {
+    public void setImgUrl(String imgUrl) {
+        this.imgUrl = imgUrl;
+    }
+
+    public Dynamic(String dId, String title, String content, String releaseTime, int status, String sortId, String userId, String imgUrl) {
         this.dId = dId;
         this.title = title;
         this.content = content;
@@ -97,5 +108,6 @@ public class Dynamic {
         this.status = status;
         this.sortId = sortId;
         this.userId = userId;
+        this.imgUrl = imgUrl;
     }
 }
