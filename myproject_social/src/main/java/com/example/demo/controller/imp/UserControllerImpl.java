@@ -6,6 +6,7 @@ import com.example.demo.controller.UserController;
 import com.example.demo.service.imp.UserServiceImpl;
 import com.util.LoadImage;
 import com.util.ResponseData;
+import com.util.imageUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -119,9 +120,10 @@ public class UserControllerImpl implements UserController {
 //上传图片
     @RequestMapping("/uploadOneImage" )
     @ResponseBody
-    public ResponseData<List<String>> uploadOneImage(@RequestParam("file[]") MultipartFile[] files) throws IOException {
-        System.out.println(files.length);
-        List urlname = LoadImage.uploadManyImage(files);
+    public ResponseData<String> uploadOneImage(@RequestParam("file") MultipartFile files) throws IOException {
+        System.out.println("diaoyongcifangfa..............");
+        String urlname = imageUtil.uploadOneImage(files);
+        System.out.println(urlname);
         return ResponseData.success(urlname);
     }
 

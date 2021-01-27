@@ -11,7 +11,7 @@ import java.util.UUID;
 public class LoadImage {
     //接收多个图片(返回图片列表名)
     public static List<String> uploadManyImage(MultipartFile[] files) throws IOException {
-        System.out.println(files.length);
+        System.out.println("PATH:"+files.length);
         // 图片存储路径
         String path = "D:\\image";
         // 判断是否有路径
